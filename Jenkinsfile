@@ -9,14 +9,14 @@ pipeline {
 
     parameters {
         string(
-                name: 'SPG_BRANCH_NAME',
+                name: 'MY_BRANCH_NAME',
                 defaultValue: "develop",
-                description: 'Which SPG branch to deploy'
+                description: 'Which branch to deploy'
         )
         choice(
-                name: "SPG_VERSION",
-                choices: "2.4.11.1",
-                description: "SPG version"
+                name: "MY_VERSION",
+                choices: "2.0.0",
+                description: "My version"
         )
     }
 
@@ -24,8 +24,8 @@ pipeline {
         stage('Initialize') {
             steps {
                 sh '''
-                    echo "branch name = ${SPG_BRANCH_NAME}"
-                    echo "Selected SPG_VERSION = ${SPG_VERSION}"
+                    echo "Selected branch name = ${MY_BRANCH_NAME}"
+                    echo "Selected version = ${MY_VERSION}"
                     echo "PATH = ${PATH}"
                 '''
             }
