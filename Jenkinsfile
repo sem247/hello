@@ -3,7 +3,6 @@ pipeline {
     agent { label "!master && !windows_slave" }
 
     options {
-        ansiColor('xterm')
         disableConcurrentBuilds()
     }
 
