@@ -1,7 +1,5 @@
 #!/usr/bin/env groovy
 pipeline {
-    agent { label "!master && !windows_slave" }
-
     options {
         disableConcurrentBuilds()
     }
