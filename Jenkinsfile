@@ -19,7 +19,7 @@ pipeline {
                 description: 'My version'
         )
         extendedChoice(
-                name: 'PROJECT',
+                name: 'MY_PROJECT',
                 defaultValue: 'B',
                 description: 'Select something',
                 visibleItemCount: 5,
@@ -41,6 +41,7 @@ pipeline {
                 sh '''
                     echo "Selected branch name = ${MY_BRANCH_NAME}"
                     echo "Selected version = ${MY_VERSION}"
+                    echo "Selected project = ${MY_PROJECT}"
                     echo "PATH = ${PATH}"
                 '''
             }
