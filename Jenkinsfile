@@ -32,7 +32,7 @@ pipeline {
                     for(item in dataArray) {
                         artifacts.add(item.text)
                     }
-                    return ["0.0.18","0.0.10"]
+                    return ['0.0.18\n0.0.10'] as ArrayList<String>
                 '''
         )
     }
