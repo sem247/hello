@@ -22,17 +22,15 @@ pipeline {
                 name: 'PROJECT',
                 defaultValue: '',
                 description: 'Select something',
+                visibleItemCount: 50,
                 type: 'PT_SINGLE_SELECT',
                 groovyScript: '''
-                    import groovy.json.JsonSlurper
-                    String myjson = "{\"data\":[{\"text\":\"0.0.18\"},{\"text\":\"0.0.10\"}]}"
                     List<String> artifacts = new ArrayList<String>()
-                    def artifactsJsonObject = jsonSlurper.parseText(myjson)
-                    def dataArray = artifactsJsonObject.data
+                    def dataArray = ['A', 'B']
                     for(item in dataArray) {
                         artifacts.add(item.text)
                     }
-                    return ['0.0.18\n0.0.10'] as ArrayList<String>
+                    return artifacts
                 '''
         )
     }
