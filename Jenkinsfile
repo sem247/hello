@@ -22,7 +22,7 @@ pipeline {
                 name: 'PROJECT',
                 defaultValue: '',
                 description: 'Select something',
-                visibleItemCount: 50,
+                visibleItemCount: 5,
                 type: 'PT_SINGLE_SELECT',
                 groovyScript: '''
                     List<String> artifacts = new ArrayList<String>()
