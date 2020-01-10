@@ -32,7 +32,7 @@ pipeline {
                     for(item in dataArray) {
                         artifacts.add(item.text)
                     }
-                    return artifacts
+                    return ["0.0.18","0.0.10"]
                 '''
         )
     }
