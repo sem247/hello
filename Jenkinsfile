@@ -21,18 +21,8 @@ pipeline {
         extendedChoice(
                 name: 'MY_PROJECT',
                 type: 'PT_SINGLE_SELECT',
-                groovyScript: '''
-                    List<String> artifacts = new ArrayList<String>()
-                    def dataArray = ['A', 'B']
-                    for(item in dataArray) {
-                        artifacts.add(item.text)
-                    }
-                    return artifacts
-                ''',
-                groovyClasspath: '',
+                value: 'B',
                 defaultValue: 'B',
-                descriptionGroovyScript: 'Just a test',
-                quoteValue: true,
                 visibleItemCount: 6,
                 description: 'Select something'
         )
