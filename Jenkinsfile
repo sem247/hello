@@ -32,6 +32,7 @@ pipeline {
                 groovyClasspath: '',
                 defaultValue: 'B',
                 descriptionGroovyScript: 'Just a test',
+                quoteValue: true,
                 visibleItemCount: 6,
                 description: 'Select something'
         )
