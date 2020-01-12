@@ -22,7 +22,7 @@ pipeline {
                 name: 'MY_PROJECT',
                 type: 'PT_SINGLE_SELECT',
                 groovyScript: '''
-                    return "B"
+                    return "A,B"
                 ''',
                 defaultValue: 'B',
                 visibleItemCount: 2,
