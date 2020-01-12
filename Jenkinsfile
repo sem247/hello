@@ -21,9 +21,9 @@ pipeline {
         extendedChoice(
                 name: 'MY_PROJECT',
                 type: 'PT_SINGLE_SELECT',
-                value: 'B',
+                value: 'A\nB',
                 defaultValue: 'B',
-                visibleItemCount: 6,
+                visibleItemCount: 2,
                 description: 'Select something'
         )
     }
