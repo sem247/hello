@@ -20,9 +20,6 @@ pipeline {
         )
         extendedChoice(
                 name: 'MY_PROJECT',
-                defaultValue: 'B',
-                description: 'Select something',
-                visibleItemCount: 5,
                 type: 'PT_SINGLE_SELECT',
                 groovyScript: '''
                     List<String> artifacts = new ArrayList<String>()
@@ -31,7 +28,19 @@ pipeline {
                         artifacts.add(item.text)
                     }
                     return artifacts
-                '''
+                ''',
+                defaultValue: 'B',
+                defaultGroovyScript: '''
+                    List<String> defaultArtifacts = new ArrayList<String>()
+                    def dataArray2 = ['B']
+                    for(dItem in dataArray2) {
+                        defaultArtifacts.add(dItem.text)
+                    }
+                    return defaultArtifacts                    
+                ''',
+                descriptionGroovyScript: 'Just a test',
+                visibleItemCount: 6,
+                description: 'Select something'
         )
     }
 
