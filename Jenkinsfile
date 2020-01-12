@@ -29,15 +29,8 @@ pipeline {
                     }
                     return artifacts
                 ''',
+                groovyClasspath: '',
                 defaultValue: 'B',
-                defaultGroovyScript: '''
-                    List<String> defaultArtifacts = new ArrayList<String>()
-                    def dataArray2 = ['B']
-                    for(dItem in dataArray2) {
-                        defaultArtifacts.add(dItem.text)
-                    }
-                    return defaultArtifacts                    
-                ''',
                 descriptionGroovyScript: 'Just a test',
                 visibleItemCount: 6,
                 description: 'Select something'
