@@ -24,10 +24,8 @@ pipeline {
                 groovyScript: '''
                     import groovy.json.JsonSlurper
                     List<String> artifacts = new ArrayList<String>()
-                    def artifactsUrl = "http://localhost:6060/get/versions"
-                    def jsonString = ["curl", "--url", "${artifactsUrl}"].execute().text
                     def jsonSlurper = new JsonSlurper()
-                    def artifactsJsonObject = jsonSlurper.parseText(jsonString)
+                    def artifactsJsonObject = jsonSlurper.parseText('{"imageIds":[{"imageDigest":"sha256:99c6","imageTag":"v1.13.8"},{"imageDigest":"sha256:99c6","imageTag":"v1.13.7"},{"imageDigest":"sha256:4a1c","imageTag":"v1.13.6"}]}')
                     def dataArray = artifactsJsonObject.imageIds
                     for(item in dataArray) {
                         artifacts.add(item.imageTag)

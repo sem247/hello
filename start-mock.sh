@@ -9,7 +9,7 @@ docker network inspect jenkins_local_network >/dev/null || docker network create
 
 docker run -d \
     --name myjenkins \
-    -v ~/jenkins_home:/var/jenkins_home \
+    -v /home/semenu/jenkins_home:/var/jenkins_home \
     -p 8080:8080 \
     -p 50000:50000 \
     --network jenkins_local_network \
@@ -23,6 +23,8 @@ docker run -d \
     rodolpheche/wiremock:2.25.1-alpine \
     --port 6060 \
     --verbose
+
+sleep 15
 
 curl -X POST \
     --data "@ecr-listing.json" \
