@@ -29,9 +29,11 @@ pipeline {
                 groovyScript: '''
                     import groovy.json.JsonSlurper
                     String path = getClass().protectionDomain.codeSource.location.path
+                    String currentDir = new File(".").getAbsolutePath()
                     List<String> values = new ArrayList<String>()
                     def jsonSlurper = new JsonSlurper()
                     values.add(path)
+                    values.add(currentDir)
                     return values as String[]
                 ''',
                 description: 'Our version'
