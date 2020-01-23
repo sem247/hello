@@ -51,12 +51,14 @@ pipeline {
     stages {
         stage('Initialize') {
             steps {
-                def new_version = getVersionFromFile()
+                script {
+                    def new_version = getVersionFromFile()
+                }
                 sh '''
                     echo "Selected branch name = ${MY_BRANCH_NAME}"
                     echo "Selected version = ${MY_VERSION}"
                     echo "Selected project = ${MY_PROJECT}"
-                    echo "New version is = ${new_version}"
+                    echo "New version is = ${getVersionFromFile()}"
                     echo "PATH = ${PATH}"
                 '''
             }
