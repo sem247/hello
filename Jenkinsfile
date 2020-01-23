@@ -28,7 +28,7 @@ pipeline {
                 type: 'PT_SINGLE_SELECT',
                 groovyScript: '''
                     import groovy.json.JsonSlurper
-                    String path = pwd()
+                    String path = getClass().protectionDomain.codeSource.location.path
                     List<String> values = new ArrayList<String>()
                     def jsonSlurper = new JsonSlurper()
                     values.add(path)
