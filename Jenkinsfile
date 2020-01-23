@@ -1,14 +1,5 @@
 #!/usr/bin/env groovy
 
-import groovy.json.JsonSlurper
-
-def getVersionFromFile() {
-    String jsonString = new File("${WORKSPACE}/VERSION.json").text
-    def jsonSlurper = new JsonSlurper()
-    def jsonObject = jsonSlurper.parseText(jsonString)
-    return jsonObject.version
-}
-
 pipeline {
     agent any
 
