@@ -3,7 +3,8 @@
 import groovy.json.JsonSlurper
 
 def getVersionFromFile() {
-    String jsonString = new File("${WORKSPACE}/VERSION.json").text
+    String path = pwd()
+    String jsonString = new File("${path}/VERSION.json").text
     def jsonSlurper = new JsonSlurper()
     def jsonObject = jsonSlurper.parseText(jsonString)
     return jsonObject.version
@@ -22,10 +23,18 @@ pipeline {
                 defaultValue: 'develop',
                 description: 'Which branch to deploy'
         )
-        choice(
+        extendedChoice(
                 name: 'MY_VERSION',
-                choices: '2.0.0',
-                description: 'My version'
+                type: 'PT_SINGLE_SELECT',
+                groovyScript: '''
+                    import groovy.json.JsonSlurper
+                    String path = pwd()
+                    List<String> values = new ArrayList<String>()
+                    def jsonSlurper = new JsonSlurper()
+                    values.add(path)
+                    return values as String[]
+                ''',
+                description: 'Our version'
         )
         extendedChoice(
                 name: 'MY_PROJECT',
@@ -51,14 +60,10 @@ pipeline {
     stages {
         stage('Initialize') {
             steps {
-                script {
-                    def new_version = getVersionFromFile()
-                }
                 sh '''
                     echo "Selected branch name = ${MY_BRANCH_NAME}"
                     echo "Selected version = ${MY_VERSION}"
                     echo "Selected project = ${MY_PROJECT}"
-                    echo "New version is = ${getVersionFromFile()}"
                     echo "PATH = ${PATH}"
                 '''
             }
