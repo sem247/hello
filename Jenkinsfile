@@ -33,7 +33,9 @@ pipeline {
                     List<String> values = new ArrayList<String>()
                     def jsonSlurper = new JsonSlurper()
                     values.add(path)
-                    values.add(currentDir)
+                    currentDir.eachFile {
+                        values.add(it)
+                    }
                     return values as String[]
                 ''',
                 description: 'Our version'
