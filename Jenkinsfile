@@ -23,16 +23,11 @@ pipeline {
                 type: 'PT_SINGLE_SELECT',
                 groovyScript: '''
                     import groovy.json.JsonSlurper
+                    String jsonString = new File("${WORKSPACE}/VERSION.json").text
                     List<String> artifacts = new ArrayList<String>()
-                    def artifactsUrl = "http://my-wiremock:6060/get/versions"
-                    def jsonString = ["curl", "--url", "${artifactsUrl}"].execute().text
-                    println "CURL result: $jsonString"
                     def jsonSlurper = new JsonSlurper()
-                    def artifactsJsonObject = jsonSlurper.parseText(jsonString)
-                    def dataArray = artifactsJsonObject.imageIds
-                    for(item in dataArray) {
-                        artifacts.add(item.imageTag)
-                    }
+                    def jsonObject = jsonSlurper.parseText(jsonString)
+                    artifacts.add(jsonObject.version)
                     return artifacts as String[]
                 ''',
                 defaultValue: '',
