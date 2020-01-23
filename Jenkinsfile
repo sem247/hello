@@ -1,5 +1,14 @@
 #!/usr/bin/env groovy
 
+import groovy.json.JsonSlurper
+
+def getVerionFromFile() {
+    String jsonString = new File("${WORKSPACE}/VERSION.json").text
+    def jsonSlurper = new JsonSlurper()
+    def jsonObject = jsonSlurper.parseText(jsonString)
+    return jsonObject.version
+}
+
 pipeline {
     agent any
 
@@ -23,11 +32,15 @@ pipeline {
                 type: 'PT_SINGLE_SELECT',
                 groovyScript: '''
                     import groovy.json.JsonSlurper
-                    String jsonString = new File("${WORKSPACE}/VERSION.json").text
                     List<String> artifacts = new ArrayList<String>()
+                    def artifactsUrl = "http://my-wiremock:6060/get/versions"
+                    def jsonString = ["curl", "--url", "${artifactsUrl}"].execute().text
                     def jsonSlurper = new JsonSlurper()
-                    def jsonObject = jsonSlurper.parseText(jsonString)
-                    artifacts.add(jsonObject.version)
+                    def artifactsJsonObject = jsonSlurper.parseText(jsonString)
+                    def dataArray = artifactsJsonObject.imageIds
+                    for(item in dataArray) {
+                        artifacts.add(item.imageTag)
+                    }
                     return artifacts as String[]
                 ''',
                 defaultValue: '',
@@ -38,10 +51,12 @@ pipeline {
     stages {
         stage('Initialize') {
             steps {
+                def new_version = getVerionFromFile()
                 sh '''
                     echo "Selected branch name = ${MY_BRANCH_NAME}"
                     echo "Selected version = ${MY_VERSION}"
                     echo "Selected project = ${MY_PROJECT}"
+                    echo "New version is = ${new_version}"
                     echo "PATH = ${PATH}"
                 '''
             }
